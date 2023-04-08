@@ -1,4 +1,4 @@
-# Work_Order_PDF_Splitter
+# Work_Order_PDF_Splitter_V1
 Splits a large PDF of Work Orders into smaller PDFs of individual Work Orders regardless of the # of pages in each WO.
 It takes the page # from the first line in the pdf page and uses that to determine where to split the PDF's. It solves a specific problem we have.
 
