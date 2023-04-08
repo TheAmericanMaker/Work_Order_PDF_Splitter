@@ -30,7 +30,7 @@ python3 Work_Order_PDF_Splitter_V1.py
 
 
 To use on windows without needing python installed you can use pyinstaller to generate an executable. The command is below.
-Or you can try the .exe I've generated. Heres the link.
+
 
 
 pyinstaller --onefile --noconsole Work_Order_PDF_Splitter_V1.py
