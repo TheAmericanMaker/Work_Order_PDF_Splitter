@@ -15,7 +15,6 @@ pip install PyPDF2
 after that installs type
 -------------------------
 pip install tkinter
-
 -----------------------------
 Now you can run the script using the command line.
 
