@@ -125,7 +125,6 @@ tk.Button(frame, text="Process PDF", command=process_pdf).grid(row=2, columnspan
 
 # Start the tkinter main loop
 root.mainloop()
-
 # Run the main function when the script is executed
 if __name__ == "__main__":
     main()
