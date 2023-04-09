@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}?v=1.0">
+
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Update Bootstrap CSS to a newer version -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1p5/jq3euK7zwD9rzgtrj2/7b/2Q5E+K5f4xq3" crossorigin="anonymous">
+    <!-- Add a custom CSS file -->
+    
+
+
+
+ <!--   <title>{{ title }}</title>-->
+    <title>James' Handy Work Order PDF Splitter</title>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+          <h1>James' PDF Splitter</h1>
+          <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="file">Upload a PDF Of WO's that you want to split into single PDFs. Page will refresh when done processing files.</label>
+              <input type="file" name="file" class="form-control-file">
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Upload</button>
+          </form>
+          {% if output_files %}
+            <h3>Download Files</h3>
+            {% if zip_filename %}
+              <h4 class="mt-3">Download All Files</h4>
+              <a href="{{ url_for('download_file', filename=zip_filename) }}">Download All as ZIP</a>
+            {% endif %}
+            <form method="post" action="{{ url_for('delete_files') }}" class="mt-3">
+              <button type="submit" class="btn btn-danger">Delete Old Output Files</button>
+            </form>         
+
+            <ul>
+              {% for file in output_files %}
+                <li><a href="{{ url_for('download_file', filename=file) }}">Download {{ file }}</a></li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <!-- Add the JavaScript code to refresh the page after form submission -->
+    <script>
+      document.querySelector('form').addEventListener('submit', function() {
+        setTimeout(function() {
+          location.reload();
+        }, 5000); // Adjust the time in milliseconds as needed
+      });
+    </script>
+  </body>
+</html>
