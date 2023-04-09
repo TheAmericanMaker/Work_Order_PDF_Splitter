@@ -3,8 +3,7 @@ import sys
 import os
 import re
 import PyPDF2
-import tkinter as tk
-from tkinter import filedialog
+
 
 # Function to extract the page number from a page
 def extract_page_number(page):
@@ -98,33 +97,7 @@ def process_pdf():
     if input_pdf and output_dir:
         bundle_pages(input_pdf, output_dir)
 
-# Create the main tkinter window
-root = tk.Tk()
-root.title("Work Order PDF Splitter by TheAmericanMaker")
 
-# Create a frame to hold the widgets
-frame = tk.Frame(root)
-frame.pack(padx=10, pady=10)
-
-# Initialize the input PDF path and output directory variables
-input_pdf_path = tk.StringVar()
-output_directory = tk.StringVar()
-
-# Create a label, entry, and button for the input PDF path
-tk.Label(frame, text="Input PDF:").grid(row=0, column=0, sticky="w")
-tk.Entry(frame, textvariable=input_pdf_path, width=50).grid(row=0, column=1)
-tk.Button(frame, text="Browse", command=browse_input_file).grid(row=0, column=2)
-
-# Create a label, entry, and button for the output directory
-tk.Label(frame, text="Output Directory:").grid(row=1, column=0, sticky="w")
-tk.Entry(frame, textvariable=output_directory, width=50).grid(row=1, column=1)
-tk.Button(frame, text="Browse", command=browse_output_folder).grid(row=1, column=2)
-
-# Create a button to process the PDF
-tk.Button(frame, text="Process PDF", command=process_pdf).grid(row=2, columnspan=3, pady=10)
-
-# Start the tkinter main loop
-root.mainloop()
 # Run the main function when the script is executed
 if __name__ == "__main__":
     main()
