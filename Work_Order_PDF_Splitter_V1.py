@@ -1,4 +1,4 @@
-# Import necessary libraries
+# This is the local version that has a GUI interface. No need for a web server here.
 import sys
 import os
 import re
