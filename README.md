@@ -3,7 +3,8 @@ The standalone python script with a nice little gui to select the file and the o
 For the standalone script run the Work_Order_PDF_Splitter.py
 
 For the server based web app run the app.py script and it launches a server at localhost:5000.
-
+--------------------------
+FOR THE WEB APP ONLY: 
 Be sure to have a folder named 'output' and one named "uploads' in the directory you have the scripts in. They should create the folders automaticly when run but the "uploads" folder doesnt always generate properly.
 
 Navigate there in a browser.
