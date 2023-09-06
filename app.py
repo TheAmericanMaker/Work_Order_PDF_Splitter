@@ -9,11 +9,11 @@ import shutil
 from bundle_pages import bundle_pages as run_splitter
 
 
-UPLOAD_FOLDER = '/home/james/Documents/Work_Order_PDF_Splitter_V1_Finished/uploads'
+UPLOAD_FOLDER = '/home/user/Documents/Work_Order_PDF_Splitter_V1_Finished/uploads'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-OUTPUT_FOLDER = '/home/james/Documents/Work_Order_PDF_Splitter_V1_Finished/output'
+OUTPUT_FOLDER = '/home/user/Documents/Work_Order_PDF_Splitter_V1_Finished/output'
 ALLOWED_EXTENSIONS = {'pdf'}
 
 app = Flask(__name__)
