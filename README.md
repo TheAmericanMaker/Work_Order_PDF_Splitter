@@ -15,13 +15,12 @@ This project was developed to fix a problem in our process of handling and organ
 
 ### Standalone Python Script with GUI
 - Features a user-friendly GUI for selecting the input file and output folder.
-- To use, run `Work_Order_PDF_Splitter.py`.
+- To use, run `Work_Order_PDF_Splitter.py`. (The most stable way to use it.)
 
 ### Web App Version
 - Hosted as a server-based web application accessible at `localhost:5000`.
 - To launch, run `app.py`.
-- Ensure you have folders named 'output' and 'uploads' in the script directory.
-  - Note: The 'uploads' folder may not always generate automatically.
+- Ensure you have folders named 'output' and 'uploads' in the script directory or else you will get an error as the 'uploads' folder may not always generate automatically.
 
 #### How to Use the Web App
 1. Navigate to `localhost:5000` in your browser.
