@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "work-order-pdf-splitter"
+version = "2.0.0"
+description = "Split a large PDF containing multiple work orders into individual PDF files"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.9"
+authors = [
+    {name = "TheAmericanMaker"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "pypdf>=4.0.0",
+]
+
+[project.optional-dependencies]
+web = [
+    "Flask>=3.0.0",
+    "Flask-WTF>=1.2.0",
+    "WTForms>=3.1.0",
+]
+dev = [
+    "mypy>=1.10.0",
+    "pytest>=8.0.0",
+    "reportlab>=4.0.0",
+    "ruff>=0.4.0",
+]
+
+[project.scripts]
+wo-split = "work_order_splitter.cli:main"
+wo-split-web = "work_order_splitter.web.app:main"
+
+[project.gui-scripts]
+wo-split-gui = "work_order_splitter.gui:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[[tool.mypy.overrides]]
+module = ["flask_wtf", "flask_wtf.*"]
+ignore_missing_imports = true

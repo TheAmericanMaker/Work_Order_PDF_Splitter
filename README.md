@@ -1,36 +1,120 @@
 # Work Order PDF Splitter
 
-## Description
-A niche tool to split a large PDF file containing multiple "Work Orders" into individual PDF files, each being a separate "Work Order", regardless of the number of pages per Work Order. 
+Split a large PDF containing multiple work orders into individual PDF files.
 
-## Motivation
-This project was developed to fix a problem in our process of handling and organizing work orders, especially in scenarios where bulk PDFs need to be broken down into individual documents for easier management and access. This problem has now been fixed upstream and this tool is not needed. However, I'll leave it here incase it may be of use to others.
+## What It Does
+
+The splitter scans each page for a `page <number>` marker. When it finds a new `page 1` after pages have already been collected, it starts a new output PDF.
+
+The project ships with two interfaces:
+
+- A Flask web app for browser-based uploads and downloads
+- A tkinter desktop app for local use without a server
 
 ## Features
-- Splits a single PDF into multiple PDFs based on Work Order separation.
-- Handles PDFs of various lengths and complexities.
-- User-friendly interface for easy operation.
 
-## Versions of the Tool
+- Shared core splitting logic used by both interfaces
+- Safer file handling and input validation
+- CSRF protection for the web app
+- Structured logging instead of ad-hoc `print()` calls
+- Unit and integration tests
+- CI workflow for linting, type checking, and tests
+- Docker support for the web interface
 
-### Standalone Python Script with GUI
-- Features a user-friendly GUI for selecting the input file and output folder.
-- To use, run `Work_Order_PDF_Splitter.py`. (The most stable way to use it.)
+## Installation
 
-### Web App Version
-- Hosted as a server-based web application accessible at `localhost:5000`.
-- To launch, run `app.py`.
-- Ensure you have folders named 'output' and 'uploads' in the script directory or else you will get an error as the 'uploads' folder may not always generate automatically.
+### Runtime Install
 
-#### How to Use the Web App
-1. Navigate to `localhost:5000` in your browser.
-2. Upload a PDF to be split.
-3. The app splits the PDF and packages the individual files into a downloadable zip file.
-4. The page refreshes after 5 seconds to display the download link.
-5. After downloading, use the delete button to clear out the split files for a new input file.
+```bash
+python -m pip install -r requirements.txt
+python -m pip install -e .
+```
+
+### Development Install
+
+```bash
+python -m pip install -e ".[web,dev]"
+```
+
+## Configuration
+
+Copy `.env.example` values into your environment if you need custom paths or a fixed Flask secret key.
+
+Available environment variables:
+
+- `FLASK_SECRET_KEY`
+- `UPLOAD_FOLDER`
+- `OUTPUT_FOLDER`
+- `FLASK_ENV`
+
+Defaults use local `uploads/` and `output/` folders in the project root.
+
+## Running the Web App
+
+```bash
+python app.py
+```
+
+Then open `http://127.0.0.1:5000`.
+
+## Running the Desktop App
+
+```bash
+python Work_Order_PDF_Splitter_V1.py
+```
+
+## CLI Usage
+
+```bash
+python bundle_pages.py input.pdf output
+```
+
+Or, after installation:
+
+```bash
+wo-split input.pdf output
+```
+
+## Testing
+
+```bash
+pytest
+ruff check .
+mypy src
+```
+
+## Docker
+
+Build and run the web app with:
+
+```bash
+docker build -t work-order-pdf-splitter .
+docker run --rm -p 5000:5000 work-order-pdf-splitter
+```
+
+## Project Layout
+
+```text
+.
+├── app.py
+├── bundle_pages.py
+├── Work_Order_PDF_Splitter_V1.py
+├── src/work_order_splitter/
+│   ├── core.py
+│   ├── gui.py
+│   └── web/
+├── templates/
+├── static/
+├── tests/
+└── .github/workflows/ci.yml
+```
+
+## Notes
+
+- The web app only replaces existing output files after a successful split.
+- Pages without a detected page marker are preserved in the current output bundle.
+- The desktop app and CLI both use the same shared core module.
 
 ## License
-- Creative Commons
 
-## Contact
-For any inquiries or contributions, please contact me here.
+CC0 1.0 Universal.
